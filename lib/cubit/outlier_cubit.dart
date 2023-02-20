@@ -8,7 +8,8 @@ class OutlierCubit extends Cubit<OutlierState> {
   void findOutlier(List<int> listOfNumbers) {
     if (listOfNumbers.length < 3) return;
     final result = listOfNumbers.firstWhere(
-      (element) => _searchForEven(listOfNumbers) ? element.isEven : element.isOdd,
+      (element) =>
+          _searchForEven(listOfNumbers) ? element.isEven : element.isOdd,
     );
     emit(OutlierState(number: result, wasExecuted: true));
   }
@@ -21,5 +22,12 @@ class OutlierCubit extends Cubit<OutlierState> {
       }
     }
     return isEven < 2;
+  }
+
+  void tryAgain() {
+    emit(OutlierState(
+      number: 0,
+      wasExecuted: false,
+    ));
   }
 }

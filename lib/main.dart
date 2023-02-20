@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import 'cubit/outlier_cubit.dart';
 
@@ -13,6 +14,8 @@ class MyApp extends StatelessWidget {
     return BlocProvider<OutlierCubit>(
       create: (context) => OutlierCubit(),
       child: const MaterialApp(
+        localizationsDelegates: AppLocalizations.localizationsDelegates,
+        supportedLocales: AppLocalizations.supportedLocales,
         home: Home(),
       ),
     );
@@ -42,8 +45,17 @@ class _HomeState extends State<Home> {
         child: BlocBuilder<OutlierCubit, OutlierState>(
           builder: (context, state) {
             return state.wasExecuted
-                ? Center(
-                    child: Text('${state.number}'),
+                ? Column(
+                    children: [
+                      Text('${state.number}'),
+                      ElevatedButton(
+                        onPressed: () {
+                          _textEditingController.clear();
+                          BlocProvider.of<OutlierCubit>(context).tryAgain();
+                        },
+                        child: Text(AppLocalizations.of(context)!.tryAgain),
+                      )
+                    ],
                   )
                 : Column(
                     children: [
@@ -59,7 +71,7 @@ class _HomeState extends State<Home> {
                           BlocProvider.of<OutlierCubit>(context)
                               .findOutlier(listOfNumbers);
                         },
-                        child: const Text('Wyszukaj'),
+                        child: Text(AppLocalizations.of(context)!.search),
                       ),
                     ],
                   );
