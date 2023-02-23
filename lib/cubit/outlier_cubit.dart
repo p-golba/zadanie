@@ -11,7 +11,7 @@ class OutlierCubit extends Cubit<OutlierState> {
       (element) =>
           _searchForEven(listOfNumbers) ? element.isEven : element.isOdd,
     );
-    emit(OutlierState(number: result, wasExecuted: true));
+    emit(OutlierState(number: result));
   }
 
   bool _searchForEven(List<int> listOfNumbers) {
@@ -22,12 +22,5 @@ class OutlierCubit extends Cubit<OutlierState> {
       }
     }
     return isEven < 2;
-  }
-
-  void tryAgain() {
-    emit(OutlierState(
-      number: 0,
-      wasExecuted: false,
-    ));
   }
 }
