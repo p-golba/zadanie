@@ -1,3 +1,4 @@
 {
-    "search": "Search"
+    "search": "Search",
+    "errorMessage": "Enter at least three numbers"
 }

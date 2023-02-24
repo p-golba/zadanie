@@ -6,12 +6,19 @@ class OutlierCubit extends Cubit<OutlierState> {
   OutlierCubit() : super(OutlierState(number: 0));
 
   void findOutlier(List<int> listOfNumbers) {
-    if (listOfNumbers.length < 3) return;
+    if (listOfNumbers.length < 3) {
+      return emit(
+        OutlierState(
+          number: 0,
+          wasExecuted: false,
+        ),
+      );
+    }
     final result = listOfNumbers.firstWhere(
       (element) =>
           _searchForEven(listOfNumbers) ? element.isEven : element.isOdd,
     );
-    emit(OutlierState(number: result));
+    emit(OutlierState(number: result, wasExecuted: true));
   }
 
   bool _searchForEven(List<int> listOfNumbers) {

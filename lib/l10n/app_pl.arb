@@ -1,3 +1,4 @@
 {
-    "search": "Wyszukaj"
+    "search": "Wyszukaj",
+    "errorMessage": "Podaj przynajmniej trzy numery"
 }
